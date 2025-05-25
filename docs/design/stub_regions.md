@@ -1,4 +1,9 @@
 # Stub Regions
+
+![R-Visor Architecture](./images/rvisor_stub_regions.drawio.png){ style="display:block; margin:auto;width:50%;" }
+<!-- **Figure 1:** Stub regions in R-Visor -->
+
+
 The traces in the code cache consist of basic blocks taken directly from the binary and extra code added by R-Visor. The additional code performs two functions: 
 * It maintains address transparency when loads, stores, or AUIPC instructions are used, and
 * invokes context switches back to R-Visor. The latter, which occurs in the stub, consists of code to 

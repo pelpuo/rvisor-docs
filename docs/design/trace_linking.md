@@ -1,5 +1,7 @@
 # Trace Linking
 
+![R-Visor Architecture](./images/rvisor_trace_linking.drawio.png){ style="display:block; margin:auto;width:70%;" }
+
 ## Description
 During binary execution, R-Visor regains control under the following scenarios: 
 * The next basic block is not already in the cache, 

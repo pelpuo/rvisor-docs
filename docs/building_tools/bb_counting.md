@@ -33,7 +33,7 @@ void exit_fn(uint64_t *regfile){
 }
 
 int main(int argc, char **argv, char **envp) {
-  set_logging_file("rvisor_bb_logs.txt", "w");
+  set_logging_file("basic_block_count.txt", "w");
 
   if (argc < 2) {
     printf("Please provide a target binary\n");
@@ -98,7 +98,7 @@ Once the routines have been created, we create the main function which is respon
 
 ```c
 int main(int argc, char **argv, char **envp) {
-  set_logging_file("rvisor_bb_logs.txt", "w");
+  set_logging_file("basic_block_count.txt", "w");
 
   if (argc < 2) {
     printf("Please provide a target binary\n");
@@ -117,7 +117,7 @@ int main(int argc, char **argv, char **envp) {
 }
 ```
 
-Our main function first starts by initializing our logging file, which was used in our `exit_fn` to print out the value of the counted basic blocks. This is done using `set_logging_file("rvisor_bb_logs.txt", "w");`. The arguments provided are the name of the file and the mode ("w" for write or "a" for append).
+Our main function first starts by initializing our logging file, which was used in our `exit_fn` to print out the value of the counted basic blocks. This is done using `set_logging_file("basic_block_count.txt", "w");`. The arguments provided are the name of the file and the mode ("w" for write or "a" for append).
 
 Next we register our target binary as a command line argument:
 
@@ -149,14 +149,14 @@ Next we register the exit routine using `rvisor_register_exit_routine(exit_fn)`
 Finally, everything has been set up, so we can start R-Visor using `rvisor_run()`.
 
 
-## Building our Tool
+## Building the Basic Block Counting Routine
 To build our tool we must modify the `CMakeLists.txt` file.
 
 ```cmake
 # CMakeLists.txt
 
-# Add this line
-add_executable(inst_counting ${EXAMPLESDIR}/inst_counting.cpp ${HEADER_FILES})
+# Add this line at the end of the file
+add_executable(count_basic_blocks ${ROUTINESDIR}/count_basic_blocks.c ${HEADER_FILES})
 ```
 
 Next we can build our tool
@@ -166,13 +166,13 @@ cmake .
 make
 ```
 
-This will create a binary called `inst_counting`. We can execute this on a RISC-V binary. For this example, we 
+This will create a binary called `count_basic_blocks` in `bin/`. We can execute this on a RISC-V binary. For this example, we use one of the embench binaries:
 
 ```
-./inst_counting benchmarks/fib
+./bin/count_basic_blocks embench/aha-mont64
 ```
 
-After the tool executes, the results are stored in `inst_counting.txt`
+After the tool executes, the results are stored in `basic_block_count.txt`
 
 ```
 Num Instructions: 6692
