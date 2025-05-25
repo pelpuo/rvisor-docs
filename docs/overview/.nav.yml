@@ -1,0 +1,6 @@
+nav:
+  - about.md
+  - building_r-visor.md
+  - instrumentation_granularity.md
+  - architecture.md
+  - routine_placement.md

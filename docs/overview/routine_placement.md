@@ -1,0 +1,6 @@
+# Routine Placement
+Based on the target [instrumentation granularities](./instrumentation_granularity), there are two potential positions for instrumentation routines to be placed. 
+
+Consider a scenario where a user would want to instrument the instruction `ADD a1, a1, a2` in order to check the values of `a1` and `a2` supplied to the instruction. If the instrumentation executes after the instruction completes, then the value of `a1` would already have been changed by the instruction and the reported values, although correct, would not be those required by the user. However, in a scenario where the user would want to know the value of `a1` after the `ADD` operation, then the operation should complete before the instrumentation routine is executed. 
+
+Based on these scenarios, R-Visor allows users to determine whether their instrumentation routine should execute before (`PRE`) or after (`POST`) an instruction. This is further detailed in the API Reference as well as the [example tools](./../example_tools/index) setions.
